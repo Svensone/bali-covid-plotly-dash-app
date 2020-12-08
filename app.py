@@ -349,7 +349,7 @@ def update_graph_4(n_clicks, dropdown_value, range_slider_value, check_list_valu
     # Sample data and figure
     # path_data = r'C:\Users\ansve\Coding\Projects-DataScience\2020.12.05-Bali_Covid_Dash_App\Data'
     df_bali = pd.read_excel('regencyCasesBali.xlsx')
-    geojson_bali = json.load('bali_geojson_id.geojson', 'r')
+    geojson_bali = json.load(open('bali_geojson_id.geojson', 'r'))
     
     fig = px.choropleth_mapbox(df_bali, geojson= geojson_bali, locations='id', color='log10 total cases',
     mapbox_style= 'carto-positron', hover_name= 'Regency', hover_data=['new cases total', 'total cases'],
