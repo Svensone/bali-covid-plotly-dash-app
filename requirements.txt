@@ -21,3 +21,4 @@ wincertstore==0.2
 # numpy==1.6.2
 pandas
 dash_bootstrap_components
+xlrd >= 1.0.0
