@@ -284,7 +284,7 @@ def update_graph_1(n_clicks, dropdown_value, range_slider_value, check_list_valu
     # Bar Chart new and total cases per regency
     path_data = r'C:\Users\ansve\Coding\Projects-DataScience\2020.12.05-Bali_Covid_Dash_App\Data'
     
-    df_bali = pd.read_excel(path_data + '/regencyCasesBali.xlsx')
+    df_bali = pd.read_excel(path_data + r'\regencyCasesBali.xlsx')
 
     fig = px.bar(df_bali, x='Regency', y='total cases', hover_data=['Regency', 'new cases total', 'total cases'], text='new cases total')
 
@@ -348,8 +348,8 @@ def update_graph_4(n_clicks, dropdown_value, range_slider_value, check_list_valu
 
     # Sample data and figure
     path_data = r'C:\Users\ansve\Coding\Projects-DataScience\2020.12.05-Bali_Covid_Dash_App\Data'
-    df_bali = pd.read_excel(path_data + '/regencyCasesBali.xlsx')
-    geojson_bali = json.load(open(path_data + '/bali_geojson_id.geojson', 'r'))
+    df_bali = pd.read_excel(path_data + r'\regencyCasesBali.xlsx')
+    geojson_bali = json.load(open(path_data + r'\bali_geojson_id.geojson', 'r'))
     
     fig = px.choropleth_mapbox(df_bali, geojson= geojson_bali, locations='id', color='log10 total cases',
     mapbox_style= 'carto-positron', hover_name= 'Regency', hover_data=['new cases total', 'total cases'],
