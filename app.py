@@ -14,6 +14,8 @@ import dash_bootstrap_components as dbc
 
 from dash.dependencies import Input, Output, State
 
+import pathlib
+
 # ------------------------------------------------------------------------------
 ## 1. App Layout
 # ------------------------------------------------------------------------------
@@ -26,8 +28,8 @@ SIDEBAR_STYLE = {
     'top': 0,
     'left': 0,
     'bottom': 0,
-    'width': '20%',
-    'padding': '20px 10px',
+    'width': '15%',
+    'padding': '00px 10px',
     'background-color': '#f8f9fa'
 }
 
@@ -35,7 +37,7 @@ SIDEBAR_STYLE = {
 CONTENT_STYLE = {
     'margin-left': '25%',
     'margin-right': '5%',
-    'padding': '20px 10p'
+    'padding': '10px 10p'
 }
 
 TEXT_STYLE = {
@@ -50,6 +52,7 @@ CARD_TEXT_STYLE = {
 
 ##      1.2 Html Components
 # ------------------------------------------------------------------------------
+
 
 controls = dbc.FormGroup(
     [
@@ -173,14 +176,14 @@ content_first_row = dbc.Row([
             [
                 dbc.CardBody(
                     [
-                        html.H4(id='card_title_1', children=['Card Title 1'], className='card-title',
+                        html.H4(id='card_title_1', children=['Total Cases per Regency'], className='card-title',
                                 style=CARD_TEXT_STYLE),
-                        html.P(id='card_text_1', children=['Sample text.'], style=CARD_TEXT_STYLE),
+                        html.P(id='card_text_1', children=['Total Positive Cases/ daily new cases'], style=CARD_TEXT_STYLE),
                     ]
                 )
             ]
         ),
-        md=3
+        md=6
     ),
     dbc.Col(
         dbc.Card(
@@ -188,14 +191,14 @@ content_first_row = dbc.Row([
 
                 dbc.CardBody(
                     [
-                        html.H4('Card Title 2', className='card-title', style=CARD_TEXT_STYLE),
-                        html.P('Sample text.', style=CARD_TEXT_STYLE),
+                        html.H4('Bali Cases', className='card-title', style=CARD_TEXT_STYLE),
+                        html.P('Cases per Regency', style=CARD_TEXT_STYLE),
                     ]
                 ),
             ]
 
         ),
-        md=3
+        md=6
     ),
 
 ])
@@ -203,8 +206,9 @@ content_first_row = dbc.Row([
 content_second_row = dbc.Row(
     [
         dbc.Col(
-            dcc.Graph(id='graph_1'), md=6
+            dcc.Graph(id='graph_1'), md=12
         ),
+        
     ]
 )
 
@@ -219,6 +223,8 @@ content_third_row = dbc.Row(
 # Content Component
 content = html.Div(
     [
+        html.Br(),
+        html.Hr(),
         html.H2('Bali Daily Covid Cases', style=TEXT_STYLE),
         html.Hr(),
         content_first_row,
@@ -253,13 +259,21 @@ def update_graph_1(n_clicks, dropdown_county_value, check_list_value):
 
     # Bar Chart new and total cases per regency
     # path_data = r'C:\Users\ansve\Coding\Projects-DataScience\2020.12.05-Bali_Covid_Dash_App\Data'
-    
-    df_bali = pd.read_excel('regencyCasesBali.xlsx')
+    PATH = pathlib.Path(__file__).parent
+    print(PATH)
+    DATA_PATH = PATH.joinpath("datasets").resolve()
+    print(DATA_PATH)
+
+    df_bali = pd.read_excel(DATA_PATH.joinpath('regencyCasesBali.xlsx'))
 
     fig = px.bar(df_bali, x='Regency', y='total cases', hover_data=['Regency', 'new cases total', 'total cases'], text='new cases total')
 
     fig.update_traces(texttemplate='%{text:.2s}', textposition='outside')
-    fig.update_layout(uniformtext_minsize=8, uniformtext_mode='hide')
+    fig.update_layout(uniformtext_minsize=8, uniformtext_mode='hide', 
+    )
+    fig.update_layout({
+        'height': 400
+    })
     return fig
 
 
@@ -277,20 +291,19 @@ def update_graph_4(n_clicks, dropdown_value, check_list_value):
 
     # Sample data and figure
     # path_data = r'C:\Users\ansve\Coding\Projects-DataScience\2020.12.05-Bali_Covid_Dash_App\Data'
-    df_bali = pd.read_excel('regencyCasesBali.xlsx')
-    geojson_bali = json.load(open('bali_geojson_id.geojson', 'r'))
+    PATH = pathlib.Path(__file__).parent
+    DATA_PATH = PATH.joinpath('datasets').resolve()
+
+    df_bali = pd.read_excel(DATA_PATH.joinpath('regencyCasesBali.xlsx'))
+    geojson_bali = json.load(open(DATA_PATH.joinpath('bali_geojson_id.geojson'), 'r'))
     
     fig = px.choropleth_mapbox(df_bali, geojson= geojson_bali, locations='id', color='log10 total cases',
     mapbox_style= 'carto-positron', hover_name= 'Regency', hover_data=['new cases total', 'total cases'],
-                    title='Covid Cases in Bali per Regency', zoom=8, center = {"lat": -8.2902, "lon": 114.8129},
+                    title='Covid Cases in Bali per Regency', zoom=8, center = {"lat": -8.5002, "lon": 115.0129},
                     opacity=0.5,)
-    # df = px.data.gapminder().query('year==2007')
-    # fig = px.scatter_geo(df, locations='iso_alpha', color='continent',
-                        #  hover_name='country', size='pop', projection='natural earth')
-    
     
     fig.update_layout({
-        'height': 600
+        'height': 800
     })
     return fig
 
@@ -307,7 +320,7 @@ def update_card_title_1(n_clicks, dropdown_value, check_list_value, radio_items_
     print(dropdown_value)
     print(check_list_value)
     # Sample data and figure
-    return 'Card Tile 1 change by call back'
+    return 'Bali Cases total and daile new'
 
 
 @app.callback(
@@ -321,7 +334,7 @@ def update_card_text_1(n_clicks, dropdown_value, check_list_value, radio_items_v
     print(dropdown_value)
     print(check_list_value)
     # Sample data and figure
-    return 'Card text change by call back'
+    return 'showing data from input'
 
 
 
