@@ -17,3 +17,4 @@ dependencies:
     - dash_bootstrap_components
     - plotly
     - gunicorn # for app deployment
+    - pathlib
