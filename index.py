@@ -10,20 +10,19 @@ from app import app
 # connect to pages
 from apps import bali, germany
 
-background_img = ('/assets/Bali-Agung-Mountain.jpg')
 
 app.layout = html.Div([
     html.Div(
         className='background-img',
-        style={
-        'verticalAlign': 'middle',
-        'textAlign': 'center',
-        'background-image': background_img,
+        # style={
+        # 'verticalAlign': 'middle',
+        # 'textAlign': 'center',
+        # # 'background-image': background_img,
         
-        'width': '100%',
-        'top': '0px',
-        'left': '0px',
-        'z-index': '1000'},
+        # 'width': '100%',
+        # 'top': '0px',
+        # 'left': '0px',
+        # 'z-index': '1000'},
         children =[
         dcc.Location(id='url', refresh=False),
         html.Div(
