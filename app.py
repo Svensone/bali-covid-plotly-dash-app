@@ -2,11 +2,13 @@ import dash
 import dash_bootstrap_components as dbc
 
 # meta_tags are required for the app layout to be mobile responsive
-# , '/assets/stylesheet.css'
+
+# add personal stylesheet '/assets/stylesheet.css'
 external_stylesheets = [dbc.themes.BOOTSTRAP ]
+
 app = dash.Dash(__name__, external_stylesheets=external_stylesheets, suppress_callback_exceptions=True)
-# test without meta_tags=[{'name': 'viewport',
-# meta_tags=[{'name': 'viewport',
-#                             'content': 'width=device-width, initial-scale=1.0'}]
+
+# test without meta_tags
+# meta_tags=[{'name': 'viewport', 'content': 'width=device-width, initial-scale=1.0'}]
             
 server = app.server

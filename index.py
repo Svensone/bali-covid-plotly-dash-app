@@ -2,8 +2,8 @@ import dash_core_components as dcc
 import dash_html_components as html
 from dash.dependencies import Input, Output
 import pathlib
-# connect to main app.py file
 
+# connect to main app.py file
 from app import app
 # from app import server
 

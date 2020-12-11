@@ -14,7 +14,7 @@ import dash_bootstrap_components as dbc
 
 from dash.dependencies import Input, Output, State
 
-# from app import app
+from app import app
 
 import pathlib
 
@@ -26,7 +26,6 @@ path_csv = PATH.joinpath('../datasets/county_covid_BW.csv')
 path_geojson = PATH.joinpath('../datasets/geojson_ger.json')
 
 df = pd.read_csv(path_csv)
-print(df.columns)
 geojson = json.load(open(path_geojson, 'r'))
 
 
@@ -65,6 +64,122 @@ CARD_TEXT_STYLE = {
 }
 
 
+controls = dbc.FormGroup(
+    [
+        html.H2('Map', style=TEXT_STYLE),
+        html.Hr(),
+        html.P('Pick a Date', style={
+            'textAlign': 'center'
+        }),
+        dcc.Dropdown(
+            id='dropdown_date',
+            options=[{
+                'label': 'Value One',
+                'value': 'value1'
+            }, {
+                'label': 'Value Two',
+                'value': 'value2'
+            },
+                {
+                    'label': 'Value Three',
+                    'value': 'value3'
+            }
+            ],
+            value=['value1'],  # default value
+            multi=True
+        ),
+        html.Br(),
+
+        html.P('Cases', style={
+            'textAlign': 'center'
+        }),
+        dbc.Card([dbc.Checklist(
+            id='check_list_cases',
+            options=[{
+                'label': 'Deaths',
+                'value': 'value1'
+            },
+                {
+                    'label': 'Recovered',
+                    'value': 'value2'
+            },
+                {
+                    'label': 'Active Cases',
+                    'value': 'value3'
+            }
+            ],
+            value=['value1', 'value2'],
+            inline=True
+        )]),
+        html.Br(),
+        html.H2('Bar Graph', style=TEXT_STYLE),
+        html.Hr(),
+        html.P('Pick a County', style={
+            'textAlign': 'center'
+        }),
+        dcc.Dropdown(
+            id='dropdown_county',
+            options=[{
+                'label': 'Bali ',
+                'value': 'value1'
+            }, {
+                'label': 'Denpasar',
+                'value': 'value2'
+            },
+                {
+                    'label': 'Badung',
+                    'value': 'value3'
+            },
+                {
+                    'label': 'Gianyiar',
+                    'value': 'value4'
+            },
+                {
+                    'label': 'Bangli',
+                    'value': 'value5'
+            },
+                {
+                    'label': 'Jembrana',
+                    'value': 'value6'
+            },
+                {
+                    'label': 'Buleleng',
+                    'value': 'value7'
+            },
+                {
+                    'label': 'Karangasem',
+                    'value': 'value8'
+            },
+                {
+                    'label': 'Foreigners',
+                    'value': 'value3'
+            }
+            ],
+            value=['value1'],  # default value
+            multi=True
+        ),
+        html.Br(),
+        dbc.Button(
+            id='submit_button',
+            n_clicks=0,
+            children='Submit',
+            color='primary',
+            block=True
+        ),
+    ]
+)
+
+# sidebar Component
+sidebar = html.Div(
+    [
+        html.Br(),
+        html.Hr(),
+        html.H2('Parameters', style=TEXT_STYLE),
+        html.Hr(),
+        controls
+    ],
+    style=SIDEBAR_STYLE,
+)
 # content row Components
 content_first_row = dbc.Row([
     dbc.Col(
@@ -72,9 +187,9 @@ content_first_row = dbc.Row([
             [
                 dbc.CardBody(
                     [
-                        html.H4(id='card_title_1', children=['Total Cases per County'], className='card-title',
+                        html.H4(id='card_title_2', children=['Total Cases per County'], className='card-title',
                                 style=CARD_TEXT_STYLE),
-                        html.P(id='card_text_1', children=[
+                        html.P(id='card_text_2', children=[
                                'Total Positive Cases/ daily new cases'], style=CARD_TEXT_STYLE),
                     ]
                 )
@@ -104,7 +219,7 @@ content_first_row = dbc.Row([
 content_second_row = dbc.Row(
     [
         dbc.Col(
-            dcc.Graph(id='graph_1'), md=12
+            dcc.Graph(id='graph_2'), md=12
         ),
 
     ]
@@ -113,7 +228,7 @@ content_second_row = dbc.Row(
 content_third_row = dbc.Row(
     [
         dbc.Col(
-            dcc.Graph(id='graph_4'), md=12,
+            dcc.Graph(id='graph_3'), md=12,
         )
     ]
 )
@@ -146,7 +261,7 @@ content = html.Div(
 )
 
 
-layout = html.Div([html.H3('App Germany'), ])
+layout = html.Div([sidebar, content])
 
 
 # 3 Callbacks
@@ -154,12 +269,12 @@ layout = html.Div([html.H3('App Germany'), ])
 
 
 @ app.callback(
-    Output('graph-1', 'figure'),
+    Output('graph_2', 'figure'),
     [Input('submit_button', 'n_clicks')],
     [State('check_list_cases', 'value'),
      State('dropdown_county', 'value')
      ])
-def update_graph_1(n_clicks, dropdown_county_value, check_list_value):
+def update_graph_2(n_clicks, dropdown_county_value, check_list_value):
     print(n_clicks)
     print(dropdown_county_value)
     print(check_list_value)
@@ -174,12 +289,12 @@ def update_graph_1(n_clicks, dropdown_county_value, check_list_value):
 
 
 @ app.callback(
-    Output('graph-1', 'figure'),
+    Output('graph_3', 'figure'),
     [Input('submit_button', 'n_clicks')],
     [State('check_list_cases', 'value'),
      State('dropdown_county', 'value')
      ])
-def update_graph_4(n_clicks, dropdown_county_value, check_list_value):
+def update_graph_3(n_clicks, dropdown_county_value, check_list_value):
     print(n_clicks)
     print(dropdown_county_value)
     print(check_list_value)
