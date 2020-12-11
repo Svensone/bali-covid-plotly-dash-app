@@ -24,8 +24,9 @@ PATH = pathlib.Path(__file__).parent
 print(PATH)
 DATA_PATH = PATH.joinpath('../datasets').resolve()
 print(DATA_PATH)
-background_img = PATH.joinpath('..//assets/Bali-Agung-Mountain.jpg')
+background_img = PATH.joinpath('../assets/Bali-Agung-Mountain.jpg')
 # background_img = url('https://images.unsplash.com/photo-1536152470836-b943b246224c?ixlib=rb-1.2.1&ixid=MXwxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHw%3D&auto=format&fit=crop&w=978&q=80!d')
+
 # ------------------------------------------------------------------------------
 # 1. App Layout
 # ------------------------------------------------------------------------------
@@ -39,7 +40,7 @@ SIDEBAR_STYLE = {
     'left': 0,
     'bottom': 0,
     'width': '25%',
-    'padding': '00px 10px',
+    'padding': '10px 10p',
     'background-color': '#f8f9fa'
 }
 
