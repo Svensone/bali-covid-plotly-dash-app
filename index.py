@@ -32,6 +32,5 @@ def dispaly_page(pathname):
     else:
         return 'click a link to see the data'
 
-
 if __name__ == '__main__':
     app.run_server(debug=True)
