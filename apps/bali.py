@@ -266,7 +266,10 @@ content = html.Div(
 # 1.3 App Layout
 # ------------------------------------------------------------------------------
 
-layout = html.Div([sidebar, content])
+layout = html.Div([
+    sidebar, 
+    content
+    ])
 
 # ------------------------------------------------------------------------------
 # 2. Connect Layout with Callback
@@ -275,10 +278,10 @@ layout = html.Div([sidebar, content])
 
 @ app.callback(
     Output('graph_1', 'figure'),
-    [Input('submit_button', 'n_clicks')],
+    Input('submit_button', 'n_clicks'),
     [State('check_list_cases', 'value'),
-     State('dropdown_county', 'value'),
-     ])
+     State('dropdown_county', 'value')]
+     )
 def update_graph_1(n_clicks, dropdown_county_value, check_list_value):
     print(n_clicks)
     print(dropdown_county_value)
@@ -339,7 +342,7 @@ def update_card_title_1(n_clicks, dropdown_value, check_list_value, radio_items_
     print(dropdown_value)
     print(check_list_value)
     # Sample data and figure
-    return 'Bali Cases total and daile new'
+    return 'Bali Cases total and daily new'
 
 
 @ app.callback(

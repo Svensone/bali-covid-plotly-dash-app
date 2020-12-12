@@ -4,7 +4,7 @@ import dash_bootstrap_components as dbc
 # meta_tags are required for the app layout to be mobile responsive
 
 # add personal stylesheet '/assets/stylesheet.css'
-external_stylesheets = [dbc.themes.BOOTSTRAP ]
+external_stylesheets = [dbc.themes.BOOTSTRAP]
 
 app = dash.Dash(__name__, external_stylesheets=external_stylesheets, suppress_callback_exceptions=True)
 
