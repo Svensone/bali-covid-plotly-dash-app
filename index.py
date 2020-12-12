@@ -1,5 +1,7 @@
 import dash_core_components as dcc
 import dash_html_components as html
+import dash_bootstrap_components as dbc
+
 from dash.dependencies import Input, Output
 import pathlib
 
@@ -10,7 +12,25 @@ from app import server
 # connect to pages
 from apps import bali, germany
 
-
+navbar = dbc.NavbarSimple(
+    children=[
+        dbc.NavItem(dbc.NavLink('the blonde Bali Boy', href="#")),
+        dbc.DropdownMenu(
+            children=[
+                dbc.DropdownMenuItem('Bali', href='/apps/bali'),
+                dbc.DropdownMenuItem('Germany', href='/apps/germany'),
+                dbc.DropdownMenuItem('to be continued ...', href='#')
+            ],
+            nav=True,
+            in_nav=True,
+            label="More",
+        )
+    ],
+    brand="NavbarSimple",
+    brand_href="#",
+    color="Primary",
+    dark=True,
+)
 app.layout = html.Div([
         dcc.Location(id='url', refresh=False),
         html.Div(
