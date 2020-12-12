@@ -48,9 +48,10 @@ SIDEBAR_STYLE = {
 
 # the style arguments for the main content page.
 CONTENT_STYLE = {
-    'margin-left': '25%',
+    'margin-left': '5%',
     'margin-right': '5%',
-    'padding': '10px 10p'
+    'padding': '10px 10p',
+    'opacity': '0.6'
 }
 
 TEXT_STYLE = {
@@ -261,7 +262,7 @@ content = html.Div([
 
 
 layout = html.Div([
-    sidebar,
+    # sidebar,
     content
 ])
 

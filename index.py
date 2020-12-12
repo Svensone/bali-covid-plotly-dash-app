@@ -14,7 +14,8 @@ from apps import bali, germany
 
 navbar = dbc.NavbarSimple(
     children=[
-        dbc.NavItem(dbc.NavLink('the blonde Bali Boy', href="https://svenson-bali-homepage.netlify.app/index.html")),
+        dbc.NavItem(dbc.NavLink('the blonde Bali Boy',
+                                href="https://svenson-bali-homepage.netlify.app/index.html")),
         dbc.DropdownMenu(
             children=[
                 dbc.DropdownMenuItem('Bali', href='/apps/bali',),
@@ -32,14 +33,31 @@ navbar = dbc.NavbarSimple(
     color="primary",
     # dark=True,
 )
-app.layout = html.Div([
+
+# Background Image
+# html.Div(
+#     style={
+#         'verticalAlign': 'middle',
+#         'textAlign': 'center',
+#         'background-image': background_img,
+#         'position': 'fixed',
+#         'width': '100%',
+#         'height': '100%',
+#         'top': '0px',
+#         'left': '0px',
+#         'z-index': '1000'},
+
+app.layout = html.Div(
+    style={
+        'background-image': 'url("/assets/Penjor-Bali.jpg")',
+        'background_position': 'center',
+        'background-repeat': 'no-repeat',
+        'background-size': 'cover',
+
+    }, children=[
+
         dcc.Location(id='url', refresh=False),
         navbar,
-        # html.Div(
-        #     [
-        #         dcc.Link('Bali Covid', href='/apps/bali'),
-        #         dcc.Link('Germany Data', href='/apps/germany'),
-        #     ]),
         html.Div(id='page-content')
     ])
 
@@ -52,7 +70,16 @@ def dispaly_page(pathname):
     if pathname == '/apps/germany':
         return germany.layout
     else:
-        return 'click a link to see the data'
+        return html.Div(
+            style={
+        'background-image': 'url("/assets/Penjor-Bali.jpg")',
+        'background_position': 'center',
+        'background-repeat': 'no-repeat',
+        'background-size': 'cover',
+        'background-color': 'white',
+            }
+        )
+
 
 if __name__ == '__main__':
     app.run_server(debug=True)

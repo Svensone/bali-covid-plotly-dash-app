@@ -23,9 +23,6 @@ import pathlib
 PATH = pathlib.Path(__file__).parent
 DATA_PATH = PATH.joinpath('../datasets').resolve()
 
-background_img = PATH.joinpath('../assets/Bali-Agung-Mountain.jpg')
-# background_img = url('https://images.unsplash.com/photo-1536152470836-b943b246224c?ixlib=rb-1.2.1&ixid=MXwxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHw%3D&auto=format&fit=crop&w=978&q=80!d')
-
 # ------------------------------------------------------------------------------
 # 1. App Layout
 # ------------------------------------------------------------------------------
@@ -45,19 +42,20 @@ SIDEBAR_STYLE = {
 
 # the style arguments for the main content page.
 CONTENT_STYLE = {
-    'margin-left': '25%',
+    'margin-left': '5%',
     'margin-right': '5%',
-    'padding': '10px 10p'
+    'padding': '10px 10p',
+
 }
 
 TEXT_STYLE = {
     'textAlign': 'center',
-    'color': '#191970'
+    'color': 'primary'
 }
 
 CARD_TEXT_STYLE = {
     'textAlign': 'center',
-    'color': '#0074D9'
+    'color': 'primary'
 }
 
 # 1.2 Html Components
@@ -213,7 +211,7 @@ content_first_row = dbc.Row([
 
         ),
         md=6
-    ),
+    )
 
 ])
 
@@ -233,42 +231,28 @@ content_third_row = dbc.Row(
         )
     ]
 )
-# Background Image Div
 
-# html.Div(
-#     style={
-#         'verticalAlign': 'middle',
-#         'textAlign': 'center',
-#         'background-image': background_img,
-#         'position': 'fixed',
-#         'width': '100%',
-#         'height': '100%',
-#         'top': '0px',
-#         'left': '0px',
-#         'z-index': '1000'},
 # Content Component
-content = html.Div(
-        [
-            html.Br(),
-            html.Hr(),
-            html.H2('Bali Daily Covid Cases', style=TEXT_STYLE),
-            html.Hr(),
-            content_first_row,
-            content_second_row,
-            content_third_row,
-        ],
-        style=CONTENT_STYLE
-    )
-
+content = html.Div([
+    html.Br(),
+    html.Hr(),
+    html.H2('Bali Daily Covid Cases', style=TEXT_STYLE),
+    html.Hr(),
+    content_first_row,
+    content_second_row,
+    content_third_row,
+],
+    style=CONTENT_STYLE
+)
 
 
 # 1.3 App Layout
 # ------------------------------------------------------------------------------
 
 layout = html.Div([
-    sidebar, 
+    # sidebar,
     content
-    ])
+])
 
 # ------------------------------------------------------------------------------
 # 2. Connect Layout with Callback
@@ -280,7 +264,7 @@ layout = html.Div([
     Input('submit_button', 'n_clicks'),
     [State('check_list_cases', 'value'),
      State('dropdown_county', 'value')]
-     )
+)
 def update_graph_1(n_clicks, dropdown_county_value, check_list_value):
     print(n_clicks)
     print(dropdown_county_value)
