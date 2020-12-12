@@ -6,7 +6,7 @@ import dash_bootstrap_components as dbc
 # add personal stylesheet '/assets/stylesheet.css'
 external_stylesheets = [dbc.themes.BOOTSTRAP]
 
-app = dash.Dash(__name__, external_stylesheets=external_stylesheets, suppress_callback_exceptions=True)
+app = dash.Dash(__name__, external_stylesheets=external_stylesheets, meta_tags= [{'name': 'viewport', 'content': 'width=device-width, initial-scale=1.0'}], suppress_callback_exceptions=True)
 
 # test without meta_tags
 # meta_tags=[{'name': 'viewport', 'content': 'width=device-width, initial-scale=1.0'}]
