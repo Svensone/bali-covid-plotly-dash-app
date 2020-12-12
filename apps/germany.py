@@ -247,8 +247,7 @@ content_third_row = dbc.Row(
 #         'z-index': '1000'},
 # Content Component
 
-content = html.Div(
-    [
+content = html.Div([
         html.Br(),
         html.Hr(),
         html.H2('Baden-Wuerttemberg Daily Covid Cases', style=TEXT_STYLE),
@@ -261,12 +260,14 @@ content = html.Div(
 )
 
 
-layout = html.Div([sidebar, content])
+layout = html.Div([
+    sidebar,
+    content
+])
 
 
 # 3 Callbacks
 # ------------------------------------------------------------------------------
-
 
 @ app.callback(
     Output('graph_2', 'figure'),
@@ -315,6 +316,6 @@ def update_graph_3(n_clicks, dropdown_county_value, check_list_value):
     fig.update_layout({
         'height': 800
     })
-    fig.update_layout(margin={"r":0, "t":0, "l":0, "b":0})
+    fig.update_layout(margin={"r": 0, "t": 0, "l": 0, "b": 0})
     # fig.update_geos(fitbounds = 'locations', visible = False)
     return fig

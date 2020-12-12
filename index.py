@@ -12,18 +12,6 @@ from apps import bali, germany
 
 
 app.layout = html.Div([
-    html.Div(
-        className='background-img',
-        # style={
-        # 'verticalAlign': 'middle',
-        # 'textAlign': 'center',
-        # # 'background-image': background_img,
-        
-        # 'width': '100%',
-        # 'top': '0px',
-        # 'left': '0px',
-        # 'z-index': '1000'},
-        children =[
         dcc.Location(id='url', refresh=False),
         html.Div(
             [
@@ -32,7 +20,6 @@ app.layout = html.Div([
             ]),
         html.Div(id='page-content')
     ])
-])
 
 
 @app.callback(Output('page-content', 'children'),
