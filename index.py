@@ -5,7 +5,7 @@ import pathlib
 
 # connect to main app.py file
 from app import app
-# from app import server
+from app import server
 
 # connect to pages
 from apps import bali, germany
