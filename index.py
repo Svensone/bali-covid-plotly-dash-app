@@ -14,30 +14,32 @@ from apps import bali, germany
 
 navbar = dbc.NavbarSimple(
     children=[
-        dbc.NavItem(dbc.NavLink('the blonde Bali Boy', href="#")),
+        dbc.NavItem(dbc.NavLink('the blonde Bali Boy', href="https://svenson-bali-homepage.netlify.app/index.html")),
         dbc.DropdownMenu(
             children=[
-                dbc.DropdownMenuItem('Bali', href='/apps/bali'),
+                dbc.DropdownMenuItem('Bali', href='/apps/bali',),
                 dbc.DropdownMenuItem('Germany', href='/apps/germany'),
                 dbc.DropdownMenuItem('to be continued ...', href='#')
             ],
             nav=True,
-            in_nav=True,
+            in_navbar=True,
             label="More",
+            color='light',
         )
     ],
     brand="NavbarSimple",
     brand_href="#",
-    color="Primary",
-    dark=True,
+    color="primary",
+    # dark=True,
 )
 app.layout = html.Div([
         dcc.Location(id='url', refresh=False),
-        html.Div(
-            [
-                dcc.Link('Bali Covid', href='/apps/bali'),
-                dcc.Link('Germany Data', href='/apps/germany'),
-            ]),
+        navbar,
+        # html.Div(
+        #     [
+        #         dcc.Link('Bali Covid', href='/apps/bali'),
+        #         dcc.Link('Germany Data', href='/apps/germany'),
+        #     ]),
         html.Div(id='page-content')
     ])
 
