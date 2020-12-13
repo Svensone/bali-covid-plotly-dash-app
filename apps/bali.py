@@ -190,6 +190,14 @@ content_first_row = dbc.Row([
                                 style=CARD_TEXT_STYLE),
                         html.P(id='card_text_1', children=[
                                'Total Positive Cases/ daily new cases'], style=CARD_TEXT_STYLE),
+                        html.Br(),
+                        dbc.Button(
+                            id='submit_button',
+                            n_clicks=0,
+                            children='Show Cases',
+                            color='primary',
+                            block=True
+                        ),
                     ]
                 )
             ]
@@ -218,7 +226,7 @@ content_first_row = dbc.Row([
 content_second_row = dbc.Row(
     [
         dbc.Col(
-            dcc.Graph(id='graph_1'), md=12
+            dcc.Graph(id='graph_1'), md=12,
         ),
 
     ]
@@ -262,13 +270,9 @@ layout = html.Div([
 @ app.callback(
     Output('graph_1', 'figure'),
     Input('submit_button', 'n_clicks'),
-    [State('check_list_cases', 'value'),
-     State('dropdown_county', 'value')]
 )
-def update_graph_1(n_clicks, dropdown_county_value, check_list_value):
-    print(n_clicks)
-    print(dropdown_county_value)
-    print(check_list_value)
+def update_graph_1(n_clicks): 
+    # print(n_clicks)
 
     # Bar Chart new and total cases per regency
     # path_data = r'C:\Users\ansve\Coding\Projects-DataScience\2020.12.05-Bali_Covid_Dash_App\Data'
@@ -290,12 +294,9 @@ def update_graph_1(n_clicks, dropdown_county_value, check_list_value):
 @ app.callback(
     Output('graph_4', 'figure'),
     [Input('submit_button', 'n_clicks')],
-    [State('dropdown_date', 'value'), State('check_list_cases', 'value'),
-     ])
-def update_graph_4(n_clicks, dropdown_value, check_list_value):
+    )
+def update_graph_4(n_clicks):
     print(n_clicks)
-    print(dropdown_value)
-    print(check_list_value)
 
     # Bali Regency Covid Cases
 
@@ -317,13 +318,10 @@ def update_graph_4(n_clicks, dropdown_value, check_list_value):
 @ app.callback(
     Output('card_title_1', 'children'),
     [Input('submit_button', 'n_clicks')],
-    [State('dropdown_date', 'value'), State('check_list_cases', 'value'),
-     State('dropdown_county', 'value'),
-     ])
-def update_card_title_1(n_clicks, dropdown_value, check_list_value, radio_items_value):
+    )
+def update_card_title_1(n_clicks):
     print(n_clicks)
-    print(dropdown_value)
-    print(check_list_value)
+    
     # Sample data and figure
     return 'Bali Cases total and daily new'
 
@@ -331,12 +329,9 @@ def update_card_title_1(n_clicks, dropdown_value, check_list_value, radio_items_
 @ app.callback(
     Output('card_text_1', 'children'),
     [Input('submit_button', 'n_clicks')],
-    [State('dropdown_date', 'value'), State('check_list_cases', 'value'),
-     State('dropdown_county', 'value'),
-     ])
-def update_card_text_1(n_clicks, dropdown_value, check_list_value, radio_items_value):
+    )
+def update_card_text_1(n_clicks):
     print(n_clicks)
-    print(dropdown_value)
-    print(check_list_value)
+    
     # Sample data and figure
     return 'showing data from input'

@@ -14,13 +14,14 @@ from apps import bali, germany
 
 navbar = dbc.NavbarSimple(
     children=[
-        dbc.NavItem(dbc.NavLink('the blonde Bali Boy',
+        dbc.NavItem(dbc.NavLink('About Me - the blonde Bali Boy',
                                 href="https://svenson-bali-homepage.netlify.app/index.html")),
         dbc.DropdownMenu(
             children=[
                 dbc.DropdownMenuItem('Bali', href='/apps/bali',),
                 dbc.DropdownMenuItem('Germany', href='/apps/germany'),
-                dbc.DropdownMenuItem('to be continued ...', href='#')
+                dbc.DropdownMenuItem('to be continued ...',
+                                     href='/apps/testDashboard')
             ],
             nav=True,
             in_navbar=True,
@@ -28,28 +29,15 @@ navbar = dbc.NavbarSimple(
             color='light',
         )
     ],
-    brand="NavbarSimple",
-    brand_href="#",
+    brand="Home",
+    brand_href="/",
     color="primary",
-    # dark=True,
+    dark=True,
 )
-
-# Background Image
-# html.Div(
-#     style={
-#         'verticalAlign': 'middle',
-#         'textAlign': 'center',
-#         'background-image': background_img,
-#         'position': 'fixed',
-#         'width': '100%',
-#         'height': '100%',
-#         'top': '0px',
-#         'left': '0px',
-#         'z-index': '1000'},
 
 app.layout = html.Div(
     style={
-        'background-image': 'url("/assets/Penjor-Bali.jpg")',
+        'background-image': 'url("/assets/bg3.jpg")',
         'background_position': 'center',
         'background-repeat': 'no-repeat',
         'background-size': 'cover',
@@ -72,11 +60,18 @@ def dispaly_page(pathname):
     else:
         return html.Div(
             style={
-        'background-image': 'url("/assets/Penjor-Bali.jpg")',
-        'background_position': 'center',
-        'background-repeat': 'no-repeat',
-        'background-size': 'cover',
-        'background-color': 'white',
+                'verticalAlign': 'middle',
+                'textAlign': 'center',
+                # 'background-image': 'url("/assets/bg1.jpg")',
+                'background_position': 'center',
+                # 'background-repeat': 'no-repeat',
+                'background-size': 'auto',
+                # 'position': 'fixed',
+                'width': '100px',
+                'height': '1000px',
+                'top': '10%',
+                'left': '0px',
+                # 'z-index': '1000'
             }
         )
 

@@ -1,5 +1,5 @@
 
-# Bali Covid-Cases per Regency Dash Web App
+# Germany Covid-Cases per Regency Dash Web App
 
 import pandas as pd
 # import numpy as np
@@ -51,7 +51,7 @@ CONTENT_STYLE = {
     'margin-left': '5%',
     'margin-right': '5%',
     'padding': '10px 10p',
-    'opacity': '0.6'
+    'opacity': '0.85'
 }
 
 TEXT_STYLE = {
@@ -192,6 +192,14 @@ content_first_row = dbc.Row([
                                 style=CARD_TEXT_STYLE),
                         html.P(id='card_text_2', children=[
                                'Total Positive Cases/ daily new cases'], style=CARD_TEXT_STYLE),
+                        html.Br(),
+                        dbc.Button(
+                            id='submit_button',
+                            n_clicks=0,
+                            children='Submit',
+                            color='primary',
+                            block=True
+                        ),
                     ]
                 )
             ]
@@ -233,30 +241,17 @@ content_third_row = dbc.Row(
         )
     ]
 )
-# Background Image Div
 
-# html.Div(
-#     style={
-#         'verticalAlign': 'middle',
-#         'textAlign': 'center',
-#         'background-image': background_img,
-#         'position': 'fixed',
-#         'width': '100%',
-#         'height': '100%',
-#         'top': '0px',
-#         'left': '0px',
-#         'z-index': '1000'},
 # Content Component
-
 content = html.Div([
-        html.Br(),
-        html.Hr(),
-        html.H2('Baden-Wuerttemberg Daily Covid Cases', style=TEXT_STYLE),
-        html.Hr(),
-        content_first_row,
-        content_second_row,
-        content_third_row,
-    ],
+    html.Br(),
+    html.Hr(),
+    html.H2('Baden-Wuerttemberg Daily Covid Cases', style=TEXT_STYLE),
+    html.Hr(),
+    content_first_row,
+    content_second_row,
+    content_third_row,
+],
     style=CONTENT_STYLE
 )
 
@@ -272,14 +267,9 @@ layout = html.Div([
 
 @ app.callback(
     Output('graph_2', 'figure'),
-    [Input('submit_button', 'n_clicks')],
-    [State('check_list_cases', 'value'),
-     State('dropdown_county', 'value')
-     ])
-def update_graph_2(n_clicks, dropdown_county_value, check_list_value):
+    [Input('submit_button', 'n_clicks')],)
+def update_graph_2(n_clicks):
     print(n_clicks)
-    print(dropdown_county_value)
-    print(check_list_value)
 
     fig = px.bar(df, x="GEN", y='cases', hover_data=[
                  'cases7_per_100k', 'death_rate'])
@@ -293,13 +283,9 @@ def update_graph_2(n_clicks, dropdown_county_value, check_list_value):
 @ app.callback(
     Output('graph_3', 'figure'),
     [Input('submit_button', 'n_clicks')],
-    [State('check_list_cases', 'value'),
-     State('dropdown_county', 'value')
-     ])
-def update_graph_3(n_clicks, dropdown_county_value, check_list_value):
+    )
+def update_graph_3(n_clicks):
     print(n_clicks)
-    print(dropdown_county_value)
-    print(check_list_value)
 
     fig = px.choropleth_mapbox(df,
                                geojson=geojson, locations='id',
@@ -309,7 +295,7 @@ def update_graph_3(n_clicks, dropdown_county_value, check_list_value):
                                            'cases7_bl_per_100k'],
                                title='Cases per County in State Baden Wuerttemberg',
                                opacity=0.8,
-                               zoom=5,
+                               zoom=7,
                                mapbox_style='carto-positron',
                                center={'lat': 48.11003112792969,
                                        'lon': 8.65347957611084}
@@ -321,16 +307,14 @@ def update_graph_3(n_clicks, dropdown_county_value, check_list_value):
     # fig.update_geos(fitbounds = 'locations', visible = False)
     return fig
 
+
 @ app.callback(
     Output('card_title_2', 'children'),
     [Input('submit_button', 'n_clicks')],
-    [State('dropdown_date', 'value'), State('check_list_cases', 'value'),
-     State('dropdown_county', 'value'),
-     ])
-def update_card_title_2(n_clicks, dropdown_value, check_list_value, radio_items_value):
+    )
+def update_card_title_2(n_clicks):
     print(n_clicks)
-    print(dropdown_value)
-    print(check_list_value)
+    
     # Sample data and figure
     return ' Germany County Cases and daily new'
 
@@ -338,12 +322,9 @@ def update_card_title_2(n_clicks, dropdown_value, check_list_value, radio_items_
 @ app.callback(
     Output('card_text_2', 'children'),
     [Input('submit_button', 'n_clicks')],
-    [State('dropdown_date', 'value'), State('check_list_cases', 'value'),
-     State('dropdown_county', 'value'),
-     ])
-def update_card_text_2(n_clicks, dropdown_value, check_list_value, radio_items_value):
+   )
+def update_card_text_2(n_clicks):
     print(n_clicks)
-    print(dropdown_value)
-    print(check_list_value)
+
     # Sample data and figure
     return 'showing data from input'
