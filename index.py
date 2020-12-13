@@ -12,6 +12,24 @@ from app import server
 # connect to pages
 from apps import bali, germany
 
+
+# CSS Styles
+# ------------------------------------------------------------------------------
+CARD_TEXT_STYLE = {
+    'textAlign': 'center',
+    'color': 'primary'
+}
+CONTENT_STYLE = {
+    'margin-left': '5%',
+    'margin-right': '5%',
+    'margin-top': '5%',
+    'padding': '10px 10p',
+
+}
+# HTML Components
+# ------------------------------------------------------------------------------
+
+# Navigation Bar
 navbar = dbc.NavbarSimple(
     children=[
         dbc.NavItem(dbc.NavLink('About Me - the blonde Bali Boy',
@@ -35,15 +53,72 @@ navbar = dbc.NavbarSimple(
     dark=True,
 )
 
+# Cards (Links) and General Info
+content_row_1 = dbc.Row([
+    dbc.Col(
+        dbc.Card(
+            [
+                dbc.CardBody(
+                    [
+                        html.H4(id='card_bali', children=['Bali Cases'], className='card-title',
+                                style=CARD_TEXT_STYLE),
+                        html.A('see more', style=CARD_TEXT_STYLE,
+                               href='/apps/bali')
+
+                    ]
+                )
+            ]
+        ),
+        md=6
+    ),
+    dbc.Col(
+        dbc.Card(
+            [
+                dbc.CardBody(
+                    [
+                        html.H4('Germany Cases', className='card-title',
+                                style=CARD_TEXT_STYLE),
+                        # , target="_blank"
+                        html.A("see more", href='/apps/germany'),
+                    ]
+                ),
+            ]
+
+        ),
+        md=6
+    )
+
+], style=CONTENT_STYLE
+)
+
+content_row_2 = dbc.Row([
+    dbc.Col(
+        dbc.Card(
+            [
+                dbc.CardBody(
+                    [
+                        html.H4(id='card_info', children=['Workflow'], className='card-title',
+                                style=CARD_TEXT_STYLE),
+                        html.P('see more', style=CARD_TEXT_STYLE,
+                               )
+
+                    ]
+                )
+            ]
+        ),
+        md=12
+    )
+
+], style=CONTENT_STYLE
+)
+
 app.layout = html.Div(
     style={
         'background-image': 'url("/assets/bg3.jpg")',
-        'background_position': 'center',
-        'background-repeat': 'no-repeat',
+        'background-position': 'center',
         'background-size': 'cover',
-
-    }, children=[
-
+    },
+    children=[
         dcc.Location(id='url', refresh=False),
         navbar,
         html.Div(id='page-content')
@@ -60,19 +135,13 @@ def dispaly_page(pathname):
     else:
         return html.Div(
             style={
-                'verticalAlign': 'middle',
-                'textAlign': 'center',
-                # 'background-image': 'url("/assets/bg1.jpg")',
-                'background_position': 'center',
-                # 'background-repeat': 'no-repeat',
-                'background-size': 'auto',
-                # 'position': 'fixed',
-                'width': '100px',
                 'height': '1000px',
                 'top': '10%',
-                'left': '0px',
-                # 'z-index': '1000'
-            }
+            },
+            children=[
+                content_row_1,
+                content_row_2
+            ]
         )
 
 

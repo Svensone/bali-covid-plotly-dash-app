@@ -250,8 +250,7 @@ content = html.Div([
     content_second_row,
     content_third_row,
 ],
-    style=CONTENT_STYLE
-)
+ )
 
 
 # 1.3 App Layout
