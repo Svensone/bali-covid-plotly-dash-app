@@ -250,7 +250,7 @@ content = html.Div([
     content_second_row,
     content_third_row,
 ],
- )
+)
 
 
 # 1.3 App Layout
@@ -270,7 +270,7 @@ layout = html.Div([
     Output('graph_1', 'figure'),
     Input('submit_button', 'n_clicks'),
 )
-def update_graph_1(n_clicks): 
+def update_graph_1(n_clicks):
     # print(n_clicks)
 
     # Bar Chart new and total cases per regency
@@ -293,7 +293,7 @@ def update_graph_1(n_clicks):
 @ app.callback(
     Output('graph_4', 'figure'),
     [Input('submit_button', 'n_clicks')],
-    )
+)
 def update_graph_4(n_clicks):
     print(n_clicks)
 
@@ -303,10 +303,20 @@ def update_graph_4(n_clicks):
     geojson_bali = json.load(
         open(DATA_PATH.joinpath('bali_geojson_id.geojson'), 'r'))
 
-    fig = px.choropleth_mapbox(df_bali, geojson=geojson_bali, locations='id', color='log10 total cases',
-                               mapbox_style='carto-positron', hover_name='Regency', hover_data=['new cases total', 'total cases'],
-                               title='Covid Cases in Bali per Regency', zoom=8, center={"lat": -8.5002, "lon": 115.0129},
-                               opacity=0.5,)
+    fig = px.choropleth_mapbox(
+        df_bali, 
+        geojson=geojson_bali, 
+        locations='id', 
+        color='total cases',
+        mapbox_style='carto-positron', 
+        hover_name='Regency', 
+        hover_data=['new cases total', 'total cases'],
+        animation_frame="date",   # working?
+        title='Covid Cases in Bali per Regency', 
+        zoom=8, 
+        center={"lat": -8.5002, "lon": 115.0129},
+        opacity=0.5,
+        )
 
     fig.update_layout({
         'height': 800
@@ -317,10 +327,10 @@ def update_graph_4(n_clicks):
 @ app.callback(
     Output('card_title_1', 'children'),
     [Input('submit_button', 'n_clicks')],
-    )
+)
 def update_card_title_1(n_clicks):
     print(n_clicks)
-    
+
     # Sample data and figure
     return 'Bali Cases total and daily new'
 
@@ -328,9 +338,9 @@ def update_card_title_1(n_clicks):
 @ app.callback(
     Output('card_text_1', 'children'),
     [Input('submit_button', 'n_clicks')],
-    )
+)
 def update_card_text_1(n_clicks):
     print(n_clicks)
-    
+
     # Sample data and figure
     return 'showing data from input'
