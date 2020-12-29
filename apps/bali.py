@@ -279,7 +279,7 @@ def update_graph_1(n_clicks):
     df_bali = pd.read_excel(DATA_PATH.joinpath('regencyCasesBali.xlsx'))
 
     fig = px.bar(df_bali, x='Regency', y='total cases', hover_data=[
-        'Regency', 'new cases total', 'total cases'], text='new cases total')
+        'Regency', 'new cases total', 'total cases'], text='new cases total', animation_frame="Date")
 
     fig.update_traces(texttemplate='%{text:.2s}', textposition='outside')
     fig.update_layout(uniformtext_minsize=8, uniformtext_mode='hide',
@@ -311,7 +311,7 @@ def update_graph_4(n_clicks):
         mapbox_style='carto-positron', 
         hover_name='Regency', 
         hover_data=['new cases total', 'total cases'],
-        animation_frame="date",   # working?
+        animation_frame="Date",   # working?
         title='Covid Cases in Bali per Regency', 
         zoom=8, 
         center={"lat": -8.5002, "lon": 115.0129},
