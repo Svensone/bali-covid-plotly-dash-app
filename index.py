@@ -32,7 +32,7 @@ CONTENT_STYLE = {
 # Navigation Bar
 navbar = dbc.NavbarSimple(
     children=[
-        dbc.NavItem(dbc.NavLink('About Me - the blonde Bali Boy',
+        dbc.NavItem(dbc.NavLink('About me - Blonde-Bali-Boy',
                                 href="https://svenson-bali-homepage.netlify.app/index.html")),
         dbc.DropdownMenu(
             children=[
@@ -64,7 +64,6 @@ content_row_1 = dbc.Row([
                                 style=CARD_TEXT_STYLE),
                         html.A('see more', style=CARD_TEXT_STYLE,
                                href='/apps/bali')
-
                     ]
                 )
             ]
@@ -83,7 +82,6 @@ content_row_1 = dbc.Row([
                     ]
                 ),
             ]
-
         ),
         md=6
     )
@@ -101,7 +99,6 @@ content_row_2 = dbc.Row([
                                 style=CARD_TEXT_STYLE),
                         html.P('see more', style=CARD_TEXT_STYLE,
                                )
-
                     ]
                 )
             ]

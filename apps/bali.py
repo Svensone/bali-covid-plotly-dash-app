@@ -220,7 +220,6 @@ content_first_row = dbc.Row([
         ),
         md=6
     )
-
 ])
 
 content_second_row = dbc.Row(
